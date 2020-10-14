@@ -1,5 +1,8 @@
 [![CircleCI](https://circleci.com/gh/piotr-coder/spring5-recipe-app.svg?style=svg&circle-token=<5b0f9792592577429937ef26ce4067c57ded8e77>)](<https://github.com/piotr-coder/covid-tracker>)
-![Heroku](https://pyheroku-badge.herokuapp.com/?app=zadanie&style=<STYLE>)
+![Heroku](https://pyheroku-badge.herokuapp.com/?app=wirus&style=<STYLE>)
 # Coronavirus Covid-19 Tracker
 
-This repository is for an example application built in Spring Framework 5
+This repository is for an example of Spring Boot Java app to track Coronavirus COVID-19 confirmed cases across the globe.
+
+Data validity depends on the source:
+https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
