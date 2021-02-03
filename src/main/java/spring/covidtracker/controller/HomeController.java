@@ -20,7 +20,7 @@ public class HomeController {
         List<LocationStats> allStats = coronavirusDataService.getStats();
         int totalReportedCases = allStats.stream().mapToInt(stat -> stat.getTotalCases()).sum();
         int totalReportedDeaths = allStats.stream().mapToInt(stat -> stat.getTotalDeaths()).sum();
-        int totalNewCases = allStats.stream().mapToInt(stat -> Integer.parseInt(stat.getNewCases())).sum();
+        int totalNewCases = allStats.stream().mapToInt(stat -> (int) (Math.round(Double.parseDouble(stat.getNewCases())))).sum();
         model.addAttribute("readingResponse", coronavirusDataService.getReadingResponse());
         model.addAttribute("stats", allStats);
         model.addAttribute("totalReportedCases", totalReportedCases);

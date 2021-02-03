@@ -11,4 +11,9 @@ public class LocationStats {
     private int totalDeaths;
     private String population;
     private String rate;
+
+    public String getNewCases(){
+        if (newCases.isEmpty()) return "0";
+        return newCases;
+    }
 }

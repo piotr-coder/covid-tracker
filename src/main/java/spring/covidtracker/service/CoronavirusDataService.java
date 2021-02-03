@@ -20,7 +20,8 @@ import java.util.List;
 @Getter
 @Service
 public class CoronavirusDataService {
-    public static final String VIRUS_DATA_URL = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv";
+//    public static final String VIRUS_DATA_URL = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv";
+    public static final String VIRUS_DATA_URL = "https://covid.ourworldindata.org/data/owid-covid-data.csv";
     private List<LocationStats> stats = new ArrayList<>();
     private String readingResponse;
 
@@ -50,26 +51,35 @@ public class CoronavirusDataService {
         StringReader stringReader = new StringReader(stringBuilder.toString());
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(stringReader);
         for (CSVRecord record : records) {
-            if (!record.get("countriesAndTerritories").equals(newStats.get(newStats.size()-1).getCountry())) {
+            if (!record.get("location").equals(newStats.get(newStats.size()-1).getCountry())) {
                 LocationStats locationStats = new LocationStats();
-                locationStats.setCountry(record.get("countriesAndTerritories"));
-                locationStats.setNewCases(record.get("cases"));
-                locationStats.setTotalCases(Integer.parseInt(locationStats.getNewCases()));
-                locationStats.setDeaths(record.get("deaths"));
-                locationStats.setTotalDeaths(Integer.parseInt(locationStats.getDeaths()));
-                locationStats.setPopulation(record.get("popData2019"));
+                locationStats.setCountry(record.get("location"));
+                locationStats.setNewCases(record.get("new_cases"));
+                locationStats.setTotalCases(convertToInt(locationStats.getNewCases()));
+                locationStats.setDeaths(record.get("new_deaths"));
+                locationStats.setTotalDeaths(convertToInt(locationStats.getDeaths()));
+                locationStats.setPopulation(record.get("population"));
                 locationStats.setRate(record.get(record.size()-1));
                 newStats.add(locationStats);
             }else {
                 newStats.get(newStats.size()-1).setTotalCases(newStats.get(newStats.size()-1).getTotalCases()
-                        + Integer.parseInt(record.get("cases")));
+                        + convertToInt(record.get("new_cases")));
                 newStats.get(newStats.size()-1).setTotalDeaths(newStats.get(newStats.size()-1).getTotalDeaths()
-                        + Integer.parseInt(record.get("deaths")));
+                        + convertToInt(record.get("new_deaths")));
             }
         }
         newStats.remove(location);
         System.out.println(newStats);
         this.stats = newStats;
+    }
+    private int convertToInt(String value){
+        try{
+            return (int) Math.round(Double.parseDouble(value));
+        }
+        catch (Exception e){
+            System.out.println("Unable to convert value " + value + " to String. Converting to 0. Exception is: " + e.toString());
+            return 0;
+        }
     }
 }
 //    @PostConstruct    // JAVA 12 SYNTAX TO FETCH DATA
