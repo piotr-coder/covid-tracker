@@ -62,10 +62,14 @@ public class CoronavirusDataService {
                 locationStats.setRate(record.get(record.size()-1));
                 newStats.add(locationStats);
             }else {
+                String newCases = record.get("new_cases");
+                String newDeaths = record.get("new_deaths");
                 newStats.get(newStats.size()-1).setTotalCases(newStats.get(newStats.size()-1).getTotalCases()
-                        + convertToInt(record.get("new_cases")));
+                        + convertToInt(newCases));
                 newStats.get(newStats.size()-1).setTotalDeaths(newStats.get(newStats.size()-1).getTotalDeaths()
-                        + convertToInt(record.get("new_deaths")));
+                        + convertToInt(newDeaths));
+                newStats.get(newStats.size()-1).setNewCases(newCases);
+                newStats.get(newStats.size()-1).setDeaths(newDeaths);
             }
         }
         newStats.remove(location);

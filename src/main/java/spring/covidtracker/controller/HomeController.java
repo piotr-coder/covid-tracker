@@ -18,9 +18,10 @@ public class HomeController {
     @GetMapping
     public String home(Model model){
         List<LocationStats> allStats = coronavirusDataService.getStats();
-        int totalReportedCases = allStats.stream().mapToInt(stat -> stat.getTotalCases()).sum();
-        int totalReportedDeaths = allStats.stream().mapToInt(stat -> stat.getTotalDeaths()).sum();
-        int totalNewCases = allStats.stream().mapToInt(stat -> (int) (Math.round(Double.parseDouble(stat.getNewCases())))).sum();
+        int totalReportedCases = allStats.get(allStats.size()-4).getTotalCases();
+        int totalReportedDeaths = allStats.get(allStats.size()-4).getTotalDeaths();
+        String totalNewCases = allStats.get(allStats.size()-4).getNewCases();
+//        int totalNewCases = allStats.stream().mapToInt(stat -> (int) (Math.round(Double.parseDouble(stat.getNewCases())))).sum();
         model.addAttribute("readingResponse", coronavirusDataService.getReadingResponse());
         model.addAttribute("stats", allStats);
         model.addAttribute("totalReportedCases", totalReportedCases);
