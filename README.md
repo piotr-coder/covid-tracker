@@ -7,4 +7,4 @@
 This repository is for an example of Spring Boot Java app to track Coronavirus COVID-19 confirmed cases across the globe.
 
 Data validity depends on the source:
-https://opendata.ecdc.europa.eu/covid19/casedistribution/csv
+https://covid.ourworldindata.org/data/owid-covid-data.csv
