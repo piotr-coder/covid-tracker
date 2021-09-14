@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import spring.covidtracker.model.LocationStats;
 
 import javax.annotation.PostConstruct;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ import java.util.List;
 public class CoronavirusDataService {
 //    public static final String VIRUS_DATA_URL = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv";
     public static final String VIRUS_DATA_URL = "https://covid.ourworldindata.org/data/owid-covid-data.csv";
-    File file = new File("owid-covid-data.csv");
+//    File file = new File("owid-covid-data.csv");
     private List<LocationStats> stats = new ArrayList<>();
     private String readingResponse;
 
@@ -32,8 +35,8 @@ public class CoronavirusDataService {
         LocationStats location = new LocationStats();
         location.setCountry("Fooo");
         newStats.add(location);
-//        BufferedReader csvReader = new BufferedReader(new InputStreamReader(url.openStream()));
-        BufferedReader csvReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        BufferedReader csvReader = new BufferedReader(new InputStreamReader(url.openStream()));
+//        BufferedReader csvReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 
         StringBuilder stringBuilder = new StringBuilder();
         String inputLine;
@@ -86,7 +89,7 @@ public class CoronavirusDataService {
             return (int) Math.round(Double.parseDouble(value));
         }
         catch (Exception e){
-            System.out.println("Unable to convert value " + value + " to String. Converting to 0. Exception is: " + e.toString());
+//            System.out.println("Unable to convert value " + value + " to String. Converting to 0. Exception is: " + e.toString());
             return 0;
         }
     }
