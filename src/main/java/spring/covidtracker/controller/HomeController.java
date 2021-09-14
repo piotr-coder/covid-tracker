@@ -1,5 +1,6 @@
 package spring.covidtracker.controller;
 
+import com.google.gson.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,4 +45,33 @@ public class HomeController {
         model.addAttribute("totalReportedDeaths", totalReportedDeaths);
         return "vaccine";
     }
+    @GetMapping("api")
+    public String api(Model model) {
+        List<LocationStats> allStats = coronavirusDataService.getStats();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(allStats); // converts to json
+        model.addAttribute("json", json);
+        return "api";
+    }
 }
+
+
+
+
+
+
+
+
+//        List<LocationStats> allStats = coronavirusDataService.getStats();
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+//        return "api";
+//        try {
+//            String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(allStats);
+//            System.out.println(json);
+//            return json;
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }

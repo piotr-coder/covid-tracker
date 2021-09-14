@@ -32,8 +32,8 @@ public class CoronavirusDataService {
         LocationStats location = new LocationStats();
         location.setCountry("Fooo");
         newStats.add(location);
-        BufferedReader csvReader = new BufferedReader(new InputStreamReader(url.openStream()));
-//        BufferedReader csvReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+//        BufferedReader csvReader = new BufferedReader(new InputStreamReader(url.openStream()));
+        BufferedReader csvReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 
         StringBuilder stringBuilder = new StringBuilder();
         String inputLine;
