@@ -81,8 +81,8 @@ public class CoronavirusDataService {
             }
         }
         newStats.remove(location);
-        System.out.println(newStats);
         this.stats = newStats;
+//        System.out.println(stats);
     }
     private int convertToInt(String value){
         try{
