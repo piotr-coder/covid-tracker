@@ -15,6 +15,7 @@ public class ApiController {
     @Autowired
     private CoronavirusDataService coronavirusDataService;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value = "api", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<LocationStats> exposeApi() {
         return coronavirusDataService.getStats();
