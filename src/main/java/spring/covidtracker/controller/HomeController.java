@@ -32,7 +32,7 @@ public class HomeController {
         modelMap.addAttribute("totalReportedDeaths", totalReportedDeaths);
     }
 
-    @GetMapping
+    @GetMapping("home")
     public String home(Model model){
         model.addAllAttributes(modelMap);
         return "home";
